@@ -7,6 +7,8 @@
     <title>Users</title>
   </head>
   <body>
+    <h2>Here is your users...</h2>
+    {% if users %}
     <ol>
       {% for user in users %}
       <li>
@@ -18,5 +20,6 @@
       </li>
       {% endfor %}
     </ol>
+    {% endif %}
   </body>
 </html>
