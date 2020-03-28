@@ -1,7 +1,8 @@
 from django.conf.urls import url
 
-from users.views import users
+from . import views
 
 urlpatterns = [
-  url(r'^$', users, name='users'),
+  url(r'^$', views.users, name='users'),
+  url(r'^add/$', views.addUser, name='addUser')
 ]
