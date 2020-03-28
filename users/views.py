@@ -3,7 +3,7 @@ from . import models, forms
 
 # Create your views here.
 def index(request):
-  return render(request,'index.html')
+  return render(request,'users/index.html')
 
 def users(request):
   users = models.User.objects.all()
