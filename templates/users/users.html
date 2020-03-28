@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Users</title>
-  </head>
-  <body>
-    <a href="{% url 'index' %}">Home</a>
-    <a href="{% url 'users:addUser' %}">Add New User</a>
-    <h2>Here is your users...</h2>
-    {% if users %}
-    <ol>
-      {% for user in users %}
-      <li>
-        <ul>
-          <li>First Name: {{ user.first_name }}</li>
-          <li>Last Name: {{ user.last_name }}</li>
-          <li>Email: {{ user.email }}</li>
-        </ul>
-      </li>
-      {% endfor %}
-    </ol>
-    {% endif %}
-  </body>
-</html>
+{% extends 'users/base.html' %} 
+
+{% block title %}Users{% endblock %} 
+
+{% block body %}
+
+  <a href="{% url 'index' %}">Home</a>
+  <br />
+  <a href="{% url 'users:addUser' %}">Add New User</a>
+
+  <h2>Here is your users...</h2>
+
+  {% if users %}
+  <ol>
+    {% for user in users %}
+    <li>
+      <ul>
+        <li>First Name: {{ user.first_name }}</li>
+        <li>Last Name: {{ user.last_name }}</li>
+        <li>Email: {{ user.email }}</li>
+      </ul>
+    </li>
+    <br />
+    {% endfor %}
+  </ol>
+  {% endif %}
+
+{% endblock %}
