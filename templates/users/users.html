@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% extends 'users/base.html' %} 
+{% load user_extras %}
 
 {% block title %}Users{% endblock %} 
 
@@ -18,7 +19,7 @@
       <ul>
         <li>First Name: {{ user.first_name | upper }}</li>
         <li>Last Name: {{ user.last_name | title }}</li>
-        <li>Email: {{ user.email }}</li>
+        <li>Email: {{ user.email | only_mail:'gmail' }}</li>
       </ul>
     </li>
     <br />
