@@ -16,8 +16,8 @@
     {% for user in users %}
     <li>
       <ul>
-        <li>First Name: {{ user.first_name }}</li>
-        <li>Last Name: {{ user.last_name }}</li>
+        <li>First Name: {{ user.first_name | upper }}</li>
+        <li>Last Name: {{ user.last_name | title }}</li>
         <li>Email: {{ user.email }}</li>
       </ul>
     </li>
