@@ -11,9 +11,10 @@ class UserInfo(models.Model):
     return f'name: {self.first_name + self.last_name}\nEmail: {self.email}'
 
 class UserProfileInfo(models.Model):
-  user = models.OneToOneField(User)
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
+
   portfolio_site = models.URLField(blank=False)
-  profile_pic = models.ImageField(upload_to='profile_pics',blank=False)
+  profile_pic = models.ImageField(upload_to='profile_pics', blank=False)
 
   def __str__(self):
     return self.user.username
