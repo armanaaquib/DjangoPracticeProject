@@ -6,7 +6,7 @@ def index(request):
   return render(request,'users/index.html')
 
 def users(request):
-  users = models.User.objects.all()
+  users = models.UserInfo.objects.all()
   return render(request, 'users/users.html', {'users':users})
 
 def addUser(request):
