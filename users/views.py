@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
 from . import models, forms
@@ -8,6 +9,11 @@ from . import models, forms
 # Create your views here.
 def index(request):
   return render(request,'users/index.html')
+
+@login_required
+def user_logout(request):
+  logout(request)
+  return HttpResponseRedirect(reverse('users:user_login'))
 
 def users(request):
   users = models.UserInfo.objects.all()
