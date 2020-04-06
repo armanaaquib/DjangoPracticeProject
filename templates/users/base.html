@@ -15,15 +15,17 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="{% url 'index' %}">Django</a></li>
-          <li>
-            <a class="navbar-link" href="{% url 'admin:index' %}">Admin</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse container" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="navbar-brand" href="{% url 'index' %}">Django</a>
           </li>
-          <li>
-            <a class="navbar-link" href="{% url 'users:register' %}">
+          <li class="nav-item">
+            <a class="navbar-brand" href="{% url 'admin:index' %}">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="navbar-brand" href="{% url 'users:register' %}">
               Register
             </a>
           </li>
