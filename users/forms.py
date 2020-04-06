@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
 from . import models
 
 class UserForm(forms.ModelForm):
@@ -9,7 +10,7 @@ class UserForm(forms.ModelForm):
     fields = '__all__'
 
 class UserInfoForm(forms.ModelForm):
-  password = forms.CharField(widget=forms.PasswordInput())
+  password = forms.CharField(widget=forms.PasswordInput(), validators=[validate_password])
   
   class Meta:
     model = User
