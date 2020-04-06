@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout
+
 from . import models, forms
 
 # Create your views here.
@@ -58,3 +62,26 @@ def register(request):
   }
 
   return render(request, 'users/registration.html', context=registration_detail)
+
+def user_login(request):
+  
+  if request.method == 'POST':
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    user = authenticate(username=username, password=password)
+
+    if user:
+      
+      if user.is_active:
+        login(request, user)
+
+        return HttpResponseRedirect(reverse('index'))
+      else:
+        return HttpResponse('<h1>ACCOUNT NOT ACTIVE</h1>')
+
+    else:
+      return HttpResponse('<h1>INVALID LOGIN DETAILS SUPPLIED!</h1>')
+
+  login_form = forms.LoginForm()
+  return render(request, 'users/login.html', {'login_form': login_form})

@@ -1,0 +1,15 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+  <div class="jumbotron">
+    <h1>Please Login<h1>
+
+    <form action="{% url 'users:user_login' %}" method="POST">
+      {% csrf_token %}
+      {{ login_form.as_p }}
+      <input type="submit" value="Login" />
+    </form>
+  </div>
+{% endblock %}

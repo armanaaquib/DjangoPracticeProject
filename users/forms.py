@@ -26,7 +26,10 @@ class UserInfoForm(forms.ModelForm):
       raise forms.ValidationError('Passwords are not equal.')
 
 class UserProfileInfoForm(forms.ModelForm):
-
   class Meta:
     model = models.UserProfileInfo
     fields = ('portfolio_site', 'profile_pic')
+
+class LoginForm(forms.Form):
+  username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'john@123'}))
+  password = forms.CharField(widget=forms.PasswordInput())
