@@ -20,3 +20,6 @@ def addUser(request):
 
   userForm = forms.UserForm()
   return render(request, 'users/addUser.html',{'form' : userForm})
+
+def register(request):
+  return render(request, 'users/registration.html')
