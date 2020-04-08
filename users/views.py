@@ -29,7 +29,7 @@ def addUser(request):
 
     if userForm.is_valid:
       userForm.save()
-      return users(request)
+      return HttpResponseRedirect('/users')
 
   userForm = forms.UserForm()
   return render(request, 'users/addUser.html',{'form' : userForm})
