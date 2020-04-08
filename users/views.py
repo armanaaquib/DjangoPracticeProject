@@ -15,10 +15,12 @@ def user_logout(request):
   logout(request)
   return HttpResponseRedirect(reverse('users:user_login'))
 
+@login_required
 def users(request):
   users = models.UserInfo.objects.all()
   return render(request, 'users/users.html', {'users':users})
 
+@login_required
 def addUser(request):
 
   if request.method == 'POST':
