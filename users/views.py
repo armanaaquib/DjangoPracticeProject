@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.template import Template, Context
 
 from . import models, forms
 
@@ -89,7 +90,16 @@ def user_login(request):
         return HttpResponse('<h1>ACCOUNT NOT ACTIVE</h1>')
 
     else:
-      return HttpResponse('<h1>INVALID LOGIN DETAILS SUPPLIED!</h1>')
+      template = Template('''
+        {% extends 'users/base.html' %}
+        {% block title %}Error in Login{% endblock %}
+        {% block body %}
+          <h1>INVALID LOGIN DETAILS SUPPLIED!</h1>
+        {% endblock %}
+      ''')
+      
+      context = Context()
+      return HttpResponse(template.render(context=context))
 
   login_form = forms.LoginForm()
   return render(request, 'users/login.html', {'login_form': login_form})
