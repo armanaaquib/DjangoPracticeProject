@@ -4,12 +4,13 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.template import Template, Context
+from django.views.generic.base import TemplateView
 
 from . import models, forms
 
 # Create your views here.
-def index(request):
-  return render(request,'users/index.html')
+class IndexView(TemplateView):
+  template_name = 'users/index.html'
 
 @login_required
 def user_logout(request):
