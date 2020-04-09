@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^users/',include('users.urls')),
     url(r'^user_logout/', views.user_logout, name='user_logout'),
+    url(r'^author/', views.AuthorView.as_view()),
 ]

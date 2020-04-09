@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.template import Template, Context
-from django.views.generic.base import TemplateView
+from django.views.generic.base import View, TemplateView
 
 from . import models, forms
 
@@ -104,3 +104,18 @@ def user_login(request):
 
   login_form = forms.LoginForm()
   return render(request, 'users/login.html', {'login_form': login_form})
+
+class AuthorView(View):
+  def get(self, request):
+    template = Template(
+      '''
+      {% extends 'users/base.html' %}
+      {% block title %}Author Name{% endblock %}
+      {% block body %}
+        <h1>Author Name: Aaquib Equbal</h1>
+      {% endblock %}
+      '''
+    )
+
+    context = Context()
+    return HttpResponse(template.render(context=context))
