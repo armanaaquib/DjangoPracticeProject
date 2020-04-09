@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.template import Template, Context
@@ -17,10 +18,14 @@ def user_logout(request):
   logout(request)
   return HttpResponseRedirect(reverse('users:user_login'))
 
-@login_required
-def users(request):
-  users = models.UserInfo.objects.all()
-  return render(request, 'users/users.html', {'users':users})
+@method_decorator(login_required, name='dispatch')
+class UsersView(TemplateView):
+  template_name = 'users/users.html'
+
+  def get_context_data(self):
+    context = super().get_context_data()
+    context['users'] = models.UserInfo.objects.all()
+    return context
 
 @login_required
 def addUser(request):
