@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^users/',include('users.urls')),
+    url(r'^schools/',include('school.urls')),
     url(r'^register/$', views.register, name='register'),
     url(r'^user_login/$', views.user_login, name='user_login'),
     url(r'^user_logout/$', views.LogoutView.as_view(), name='user_logout'),
