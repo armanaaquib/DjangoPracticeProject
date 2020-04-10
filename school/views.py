@@ -8,5 +8,10 @@ from . import models
 # Create your views here.
 @method_decorator(login_required, name='dispatch')
 class SchoolListView(ListView):
+  template_name = 'school_list.html'
   context_object_name = 'schools'
   model = models.School
+
+  def get_queryset(self):
+    context = models.School.objects.filter(user=self.request.user)
+    return context
