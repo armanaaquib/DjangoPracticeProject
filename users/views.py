@@ -17,7 +17,7 @@ class IndexView(TemplateView):
 class LogoutView(View):
   def get(self, request):
     logout(request)
-    return HttpResponseRedirect(reverse('users:user_login'))
+    return HttpResponseRedirect(reverse('user_login'))
 
 @method_decorator(login_required, name='dispatch')
 class UsersView(TemplateView):
@@ -98,7 +98,7 @@ def user_login(request):
 
     else:
       template = Template('''
-        {% extends 'users/base.html' %}
+        {% extends 'base.html' %}
         {% block title %}Error in Login{% endblock %}
         {% block body %}
           <h1>INVALID LOGIN DETAILS SUPPLIED!</h1>
@@ -115,7 +115,7 @@ class AuthorView(View):
   def get(self, request):
     template = Template(
       '''
-      {% extends 'users/base.html' %}
+      {% extends 'base.html' %}
       {% block title %}Author Name{% endblock %}
       {% block body %}
         <h1>Author Name: Aaquib Equbal</h1>
