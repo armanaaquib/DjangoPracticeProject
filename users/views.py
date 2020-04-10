@@ -11,7 +11,7 @@ from . import models, forms
 
 # Create your views here.
 class IndexView(TemplateView):
-  template_name = 'users/index.html'
+  template_name = 'index.html'
 
 @method_decorator(login_required, name='dispatch')
 class LogoutView(View):
@@ -21,7 +21,7 @@ class LogoutView(View):
 
 @method_decorator(login_required, name='dispatch')
 class UsersView(TemplateView):
-  template_name = 'users/users.html'
+  template_name = 'users.html'
 
   def get_context_data(self):
     context = super().get_context_data()
@@ -39,7 +39,7 @@ def addUser(request):
       return HttpResponseRedirect('/users')
 
   userForm = forms.UserForm()
-  return render(request, 'users/addUser.html',{'form' : userForm})
+  return render(request, 'addUser.html',{'form' : userForm})
 
 def register(request):
 
@@ -77,7 +77,7 @@ def register(request):
     'registered': registered,
   }
 
-  return render(request, 'users/registration.html', context=registration_detail)
+  return render(request, 'registration.html', context=registration_detail)
 
 def user_login(request):
   
@@ -109,7 +109,7 @@ def user_login(request):
       return HttpResponse(template.render(context=context))
 
   login_form = forms.LoginForm()
-  return render(request, 'users/login.html', {'login_form': login_form})
+  return render(request, 'login.html', {'login_form': login_form})
 
 class AuthorView(View):
   def get(self, request):
