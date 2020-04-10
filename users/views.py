@@ -13,10 +13,11 @@ from . import models, forms
 class IndexView(TemplateView):
   template_name = 'users/index.html'
 
-@login_required
-def user_logout(request):
-  logout(request)
-  return HttpResponseRedirect(reverse('users:user_login'))
+@method_decorator(login_required, name='dispatch')
+class LogoutView(View):
+  def get(self, request):
+    logout(request)
+    return HttpResponseRedirect(reverse('users:user_login'))
 
 @method_decorator(login_required, name='dispatch')
 class UsersView(TemplateView):
