@@ -67,3 +67,58 @@ class TestSchoolListView(TestCase):
 
     self.assertEqual(response.status_code, 200)
     self.assertTemplateUsed(response, 'school_list.html')
+
+class TestSchoolDetail(TestCase):
+  def setUp(self):
+    test_user = User.objects.create_user(username='john', password='jo-kl')
+    test_user.save()
+
+    name = 'MANUU'
+    principal = 'Dr. Aslam Parvaiz'
+    location = 'Hyderabad'
+
+    test_school = School.objects.create(
+      name=name, 
+      principal=principal, 
+      location=location, 
+      user=test_user
+    )
+    test_school.save()
+
+    no_of_students = 5
+
+    for student_id in range(no_of_students):
+      test_student = Student.objects.create(
+        name = f'name-{student_id}',
+        age = student_id,
+        school = test_school
+      )
+      test_student.save()
+
+    
+
+  def test_redirect_if_not_logged_in(self):
+    response = self.client.get(reverse('school:detail', kwargs={'pk': 1}))
+
+    self.assertEqual(response.status_code, 302)
+    self.assertTrue(response.url.startswith('/user_login'))
+
+  def test_correct_user(self):
+    self.client.login(username='john', password='jo-kl')
+    response = self.client.get(reverse('school:detail', kwargs={'pk': 1}))
+
+    self.assertEqual(response.status_code, 200)
+    self.assertEqual(str(response.context['user']), 'john')
+
+  def test_correct_context(self):
+    self.client.login(username='john', password='jo-kl')
+    response = self.client.get(reverse('school:detail', kwargs={'pk': 1}))
+
+    # self.assertEqual(len(response.context['school'].students.all), 5)
+
+  def test_uses_correct_template(self):
+    self.client.login(username='john', password='jo-kl')
+    response = self.client.get(reverse('school:detail', kwargs={'pk': 1}))
+
+    self.assertEqual(response.status_code, 200)
+    self.assertTemplateUsed(response, 'school_detail.html')
