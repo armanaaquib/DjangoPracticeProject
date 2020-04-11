@@ -2,7 +2,7 @@
 
 {% block title %}
   {% if form.instance.pk %}
-    Update  
+    Update {{ form.instance.name }}
   {% else %}
     Add
   {% endif %}
@@ -22,8 +22,11 @@
 
       {% if form.instance.pk %}
         <input type="submit" class='btn btn-warning' value="Update">
+        <a href="{% url 'school:detail' pk=form.instance.pk %} ">Cancel</a>
       {% else %}
         <input type="submit" class='btn btn-primary' value="Add">
+      <a href="{% url 'school:schools' %} ">Cancel</a>
+
       {% endif %}
     </form>
   </div>

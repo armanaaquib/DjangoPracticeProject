@@ -47,3 +47,13 @@ class SchoolDeleteView(DeleteView):
   model = models.School
   template_name = 'school_confirm_delete.html'
   success_url = reverse_lazy('school:schools')
+
+@method_decorator(login_required, name='dispatch')
+class StudentCreateView(CreateView):
+  model = models.Student
+  fields = ['name', 'age']
+  template_name = 'student_form.html'
+
+  def form_valid(self, form):
+    form.instance.school = models.School.objects.get(pk=self.kwargs['school_id'])
+    return super().form_valid(form)

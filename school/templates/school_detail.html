@@ -17,10 +17,13 @@
 
   <div class="container">
     <p>
-      <a class='btn btn-warning' href="{% url 'school:update' pk=school.pk %}">Update</a>
+      <a class='btn btn-primary' href="{% url 'school:add-student' school_id=school.pk %}">Add student</a>
     </p>
     <p>
-      <a class='btn btn-danger' href="{% url 'school:delete' pk=school.pk %}">Delete</a>
+      <a class='btn btn-warning' href="{% url 'school:update' pk=school.pk %}">Update School</a>
+    </p>
+    <p>
+      <a class='btn btn-danger' href="{% url 'school:delete' pk=school.pk %}">Delete School</a>
     </p>
   </div>
 {% endblock %}
