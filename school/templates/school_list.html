@@ -7,17 +7,7 @@
     <h1>Welcome to the List of Schools Page!</h1>
     <ol>
       {% for school in schools %}
-        <p>{{ school.name }}</p>
+        <li><a href="{{school.id}}">{{ school.name }}</a></li>
       {% endfor %}
     </ol>
 {% endblock %}
-
-
-{% comment %}     
-      <ol>
-        {% for school in school_list %}
-          <h2><li><a href="{{school.id}}/">{{school.name}} </a></li></h2>
-        {% endfor %}
-      </ol>
-
-  </div> {% endcomment %}
