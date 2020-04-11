@@ -10,7 +10,7 @@ class School(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def get_absolute_url(self):
-    return reverse('school:schools')
+    return reverse('school:detail', kwargs={'pk': self.pk})
 
   def __str__(self):
     return self.name
