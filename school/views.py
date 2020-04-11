@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -20,3 +22,13 @@ class SchoolListView(ListView):
 class SchoolDetailView(DetailView):
   template_name = 'school_detail.html'
   model = models.School
+
+@method_decorator(login_required, name='dispatch')
+class SchoolCreateView(CreateView):
+  model = models.School
+  fields = ['name', 'principal', 'location']
+  template_name = 'school_form.html'
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)

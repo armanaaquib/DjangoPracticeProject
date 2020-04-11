@@ -7,7 +7,11 @@
     <h1>Welcome to the List of Schools Page!</h1>
     <ol>
       {% for school in schools %}
-        <li><a href="{{school.id}}">{{ school.name }}</a></li>
+        <h4><li><a href="{{school.id}}">{{ school.name }}</a></li></h4>
       {% endfor %}
     </ol>
+  </div>
+  <div class="container">
+    <p><a class='btn btn-primary' href="{% url 'school:add' %}">Add School</a></p>
+  </div>
 {% endblock %}
