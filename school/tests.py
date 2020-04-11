@@ -11,3 +11,13 @@ class TestSchoolModel(TestCase):
   def test_str(self):
     school = School(name='MANUU')
     self.assertEqual(school.__str__(), 'MANUU')
+
+class TestStudentModel(TestCase):
+  def test_get_absolute_url(self):
+    school = School(pk='1')
+    student = Student(school=school)
+    self.assertEqual(student.get_absolute_url(), '/schools/1/')
+
+  def test_str(self):
+    student = Student(name='John')
+    self.assertEqual(student.__str__(), 'John')
