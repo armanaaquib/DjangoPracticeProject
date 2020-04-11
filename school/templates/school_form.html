@@ -4,11 +4,20 @@
 
 {% block body %}
   <div class="jumbotron">
-    <h3>Enter School Details:</h3>
+    {% if form.instance.pk %}
+      <h3>Update School Detail:</h3>
+    {% else %}
+      <h3>Enter School Details:</h3>
+    {% endif %}
     <form method="POST">
-     {% csrf_token %}
+      {% csrf_token %}
       {{ form.as_p }}
-      <input type="submit" class='btn btn-primary' value="Add">
+
+      {% if form.instance.pk %}
+        <input type="submit" class='btn btn-warning' value="Update">
+      {% else %}
+        <input type="submit" class='btn btn-primary' value="Add">
+      {% endif %}
     </form>
   </div>
 {% endblock %}
