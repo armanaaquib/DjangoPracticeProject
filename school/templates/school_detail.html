@@ -19,5 +19,8 @@
     <p>
       <a class='btn btn-warning' href="{% url 'school:update' pk=school.pk %}">Update</a>
     </p>
+    <p>
+      <a class='btn btn-danger' href="{% url 'school:delete' pk=school.pk %}">Delete</a>
+    </p>
   </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
@@ -40,3 +40,10 @@ class SchoolUpdateView(UpdateView):
   model = models.School
   fields = ['name', 'principal']
   template_name = 'school_form.html'
+
+@method_decorator(login_required, name='dispatch')
+class SchoolDeleteView(DeleteView):
+  context_object_name = 'school'
+  model = models.School
+  template_name = 'school_confirm_delete.html'
+  success_url = reverse_lazy('school:schools')
